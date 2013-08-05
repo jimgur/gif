@@ -1,0 +1,9 @@
+#!/bin/bash
+if [ $# -eq 0 ] ; then
+    # Run the full battery of tests.
+    jasmine-node --verbose --coffee tests/
+    
+else
+    # Test a specific unit.
+    jasmine-node --verbose --coffee $1    
+fi
