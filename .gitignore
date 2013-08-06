@@ -1,2 +1,4 @@
 .DS_Store
-js/
+src/js/*
+dist/*
+!dist/placeholder.txt
