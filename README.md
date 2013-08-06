@@ -7,3 +7,9 @@ vid2gif. a GIF generating browser extension
 # Running the unit tests
 
     $ grunt test
+    
+# Packaging / Testing the extension
+
+Proceed to http://developer.chrome.com/extensions/packaging.html and point the extension directory to
+gif/dist. That's all!
+    
