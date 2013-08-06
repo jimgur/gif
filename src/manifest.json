@@ -1,12 +1,23 @@
 {
   "name": "vid2gif",
-  "version": "0.0.1",
-  "manifest_version": 2,
+  "description": "Create a GIFs from Youtube videos.",
+  "version": "0.1",
+  
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "tabs",
+    "clipboardWrite",
+    "*://*.youtube.com/*"
   ],
-  "background": {
-    "scripts": ["vid2gif.js"],
-    "persistent": false
-  }
+  
+  "content_scripts" : [
+    {
+      "matches" : [ "*://*.youtube.com/*" ],
+      "js" : [ "vid2gif.js" ],
+      "run_at" : "document_idle",
+      "all_frames" : false
+    }
+  ],
+  
+  "manifest_version": 2
 }

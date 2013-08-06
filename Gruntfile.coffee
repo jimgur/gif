@@ -7,14 +7,17 @@ module.exports = (grunt) ->
       compile :
         options :
           wrap                   : true
-          baseUrl                : './src/js/'
-          out                    : './dist/vid2gif.js'
+          baseUrl                : 'src/js'
+          out                    : 'dist/vid2gif.js'
           optimize               : 'uglify'
           findNestedDependencies : false
           name                   : 'almond'   # use almond instead of requireJS for faster AMD API
-          include                : 'background'
+          include                : 'contentScript'
     
     shell :
+      copyIcon :
+        command : 'cp src/icon.png dist/'
+      
       copyManifest :
         command : 'cp src/manifest.json dist/'
       
