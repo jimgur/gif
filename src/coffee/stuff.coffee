@@ -1,2 +1,2 @@
-define ->
+define 'stuff', [], ->
   1

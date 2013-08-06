@@ -8,13 +8,15 @@ module.exports = (grunt) ->
         options :
           wrap                   : true
           baseUrl                : './src/js/'
-          out                    : './dist/app.js'
+          out                    : './dist/vid2gif.js'
           optimize               : 'uglify'
           findNestedDependencies : false
           name                   : 'almond'   # use almond instead of requireJS for faster AMD API
           include                : 'background'
     
     shell :
+      copyManifest :
+        command : 'cp src/manifest.json dist/'
       
       cleanJS :
         command : 'rm -rf src/js ; rm -rf dist '
@@ -29,10 +31,11 @@ module.exports = (grunt) ->
         command : 'jasmine-node --verbose --runWithRequireJs --coffee src/tests/'
         
     jasmine_node :
-      projectRoot : './src/js'
-      requirejs   : true
-      forceExit   : true
-      
+      forceExit       : true
+      match           : '.'
+      matchall        : false
+      extensions      : 'js'
+      specNameMatcher : 'spec'
   })
   
   grunt.loadNpmTasks('grunt-shell')
@@ -44,12 +47,7 @@ module.exports = (grunt) ->
     'shell:compileCoffee'
     'shell:copyAlmond'
     'requirejs'
+    'shell:copyManifest'
   ])
-  
-  grunt.registerTask('test', [
-    'shell:cleanJS'
-    'shell:compileCoffee'
-    'jasmine_node'
-  ])
-  
+    
   return
