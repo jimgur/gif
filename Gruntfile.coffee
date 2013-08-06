@@ -26,21 +26,13 @@ module.exports = (grunt) ->
     
       compileCoffee :
         command : 'coffee -b -c --output src/js/ src/coffee/'
-    
-      test :
-        command : 'jasmine-node --verbose --runWithRequireJs --coffee src/tests/'
-        
-    jasmine_node :
-      forceExit       : true
-      match           : '.'
-      matchall        : false
-      extensions      : 'js'
-      specNameMatcher : 'spec'
+
   })
   
   grunt.loadNpmTasks('grunt-shell')
-  grunt.loadNpmTasks('grunt-contrib-requirejs')
-  grunt.loadNpmTasks('grunt-jasmine-node')
+  grunt.loadNpmTasks('grunt-contrib-requirejs') 
+  
+  # Tasks.
   
   grunt.registerTask('default', [
     'shell:cleanJS'
