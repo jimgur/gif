@@ -2,3 +2,4 @@
 src/js/*
 dist/*
 !dist/placeholder.txt
+ffmpeg/*

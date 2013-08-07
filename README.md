@@ -1,7 +1,7 @@
 vid2gif
 =======
 
-- Chrome extension for capturing frames of a Youtube video
+- node utility to generate a GIF from a youtube video via command line
 - Stitch these frames together to create a GIF, which is then uploaded to Imgur
 - Jim @ imgur
 
