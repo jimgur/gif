@@ -4,7 +4,7 @@ do ( ->
   GLOBAL.ytdl     = require('ytdl')
   GLOBAL.url      = require('url')
   GLOBAL.ERRORS   = require('./ERRORS.js')  
-  GLOBAL.vid2gif  = require('./vid2gif.js')
+  GLOBAL.vid2gif  = require('./vid2gif.js') 
   
   requestListener = (req, res) ->
     

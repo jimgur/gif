@@ -1,4 +1,5 @@
 child_process = require('child_process')
+oauth         = require('oauth')
 
 class Vid2GIF
 
@@ -32,6 +33,8 @@ class Vid2GIF
   
   uploadToImgur : ->
   
+  deleteTmpFiles : ->
+    
   
   sendResponse : ->
     console.log("GIF created for #{@filename}")
