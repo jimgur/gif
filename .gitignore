@@ -1,5 +1,5 @@
 .DS_Store
-src/js/*
-dist/*
-!dist/placeholder.txt
-ffmpeg/*
+js/*
+tmp/*
+bin/*
+!bin/*.7z

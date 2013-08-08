@@ -1,3 +1,0 @@
-define ->
-  return 1
-

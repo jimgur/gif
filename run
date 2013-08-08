@@ -1,0 +1,4 @@
+#!/bin/bash
+coffee -b -c --output js/ coffee/
+mkdir tmp
+node js/server.js

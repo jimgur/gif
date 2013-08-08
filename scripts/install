@@ -1,58 +1,48 @@
 #!/bin/bash
 
-function checkAndInstallBrew {
-    local isInstalled="1"
-    brew -v foo>/dev/null 2>&1 || { isInstalled="0"; }
-    
-    if [ "isInstalled" = "0" ];
-    then ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go);
-    #else echo "brew already installed.";
+function checkFFMPEG {
+    if [ ! -f bin/ffmpeg ]; then
+        echo "Extracting FFMPEG..."
+        open bin/ffmpeg-2.0.7z;
     fi
 }
 
-function installLibAACPlus {
-    echo "Installing FFMPEG dependency : libaacplus ...";
-
-    wget http://217.20.164.161/~tipok/aacplus/libaacplus-2.0.2.tar.gz
-    tar xzf libaacplus-2.0.2.tar.gz
-    cd libaacplus-2.0.2
-    # libtool on osx is quite different from the gnu libtool, which is called glibtool on osx
-    sed -i '.bck' -e 's/libtool/glibtool/' autogen.sh
-    ./autogen.sh
-    make && make install
-    cd ..
+function checkBrew {
+    local isInstalled="1"
+    command -v brew>/dev/null 2>&1 || { isInstalled="0"; }
+    
+    if [ "isInstalled" = "0" ];
+    then ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go);
+    fi
 }
 
-function installFFMPEG {
-    checkAndInstallBrew;
-    echo "Installing FFMPEG...";
-    # from http://ffmpeg.org/trac/ffmpeg/wiki/MacOSXCompilationGuide
-    
-    echo "Installing FFMPEG dependencies...";
-    brew install automake celt faac fdk-aac git lame libass libtool libvorbis libvpx \
-    libvo-aacenc opencore-amr openjpeg opus sdl schroedinger shtool speex texi2html \
-    theora wget x264 xvid yasm;
-    
-    echo "Compiling FFMPEG...";
-    if [ ! -d "ffmpeg"]; then 
-    git clone git://source.ffmpeg.org/ffmpeg.git ffmpeg
-    cd ffmpeg
-    ./configure --enable-gpl --enable-version3 --enable-nonfree --enable-postproc --enable-libaacplus \
-    --enable-libass --enable-libcelt --enable-libfaac --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame \
-    --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libopenjpeg --enable-openssl \
-    --enable-libopus --enable-libschroedinger --enable-libspeex --enable-libtheora --enable-libvo-aacenc \
-    --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libxvid --prefix=/usr/local
-    make && make install
-    cd ..
-    
-    exit 0;
+function checkNodeJS {
+    command -v node >/dev/null 2>&1 || {
+        echo >&2 "Installing NodeJS...";
+        checkBrew
+        brew install node
+        exit 1;
+    }
 }
 
+function checkYTDL {
+    command -v ytdl >/dev/null 2>&1 || {
+        echo >&2 "Installing YTDL...";
+        npm install -g ytdl
+        exit 1;
+    }
+}
 
 while test $# -gt 0; do
     case "$1" in
         ffmpeg)
-            ffmpeg -v foo>/dev/null 2>&1 || { installFFMPEG; exit 1; }
+            checkFFMPEG;
+            checkNodeJS;
+            checkYTDL;
+            
+            #ImageMagick check
+            
+            exit 0;
             ;;
         
         *)
