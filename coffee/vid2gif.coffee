@@ -140,11 +140,15 @@ class Vid2GIF
   
   deleteTmpFiles : ->
     console.log('Deleting temp files...')
-    # todo
+    fs.unlink("#{filename}", -> return)
+    fs.unlink("#{filename}.gif", -> return)
+    fs.unlink("#{filename}.opt.gif", -> return)
   
   sendResponse : (uploadResponse) ->
     jsonResponse = JSON.stringify(uploadResponse)
     console.log("GIF uploaded! Response = #{jsonResponse}")
+    
+    @deleteTmpFiles()
     
     @res.write(jsonResponse)
     @res.end()
