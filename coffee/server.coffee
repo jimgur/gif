@@ -3,6 +3,7 @@ do ( ->
   GLOBAL.fs       = require('fs')
   GLOBAL.ytdl     = require('ytdl')
   GLOBAL.url      = require('url')
+  
   GLOBAL.ERRORS   = require('./ERRORS.js')  
   GLOBAL.vid2gif  = require('./vid2gif.js')
   
@@ -44,7 +45,7 @@ do ( ->
     })
     
     # Initiate download
-    dl = ytdl(GET.url, { quality : 'lowest' }) # '17' for something slightly better than lowest
+    dl = ytdl(GET.url, { quality : '36' }) # '17' for something slightly better than lowest
     
     # Trigger the converter once the download is complete
     dl.on('end', -> gif.startConversion())

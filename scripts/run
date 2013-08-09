@@ -1,5 +1,61 @@
 #!/bin/bash
 
+# Script tested for OSX only.
+
+function checkFFMPEG {
+    if [ ! -f bin/ffmpeg ]; then
+        echo "Extracting FFMPEG..."
+        open bin/ffmpeg-2.0.7z;
+    fi
+}
+
+function checkBrew {
+    echo "checkBrew()";
+    local isInstalled="1"
+    command -v brew>/dev/null 2>&1 || { isInstalled="0"; }
+    
+    if [ "isInstalled" = "0" ];
+    then ruby <(curl -fsSkL raw.github.com/mxcl/homebrew/go);
+    fi
+}
+
+function checkNodeJS {
+    echo "checkNodeJS()";
+    command -v node >/dev/null 2>&1 || {
+        echo >&2 "Installing NodeJS...";
+        checkBrew
+        brew install node
+    }
+}
+
+function checkNodeModules {
+    echo "checkNodeModules()";
+    command -v coffee >/dev/null 2>&1 || {
+        echo >&2 "Installing Node modules...";
+        # Might have to omit -g for some of these, but it SHOULD work
+        #npm install ytdl
+        #npm install oauth
+        #npm install restler
+        npm install -g coffee-script
+    }
+}
+
+function checkGifsicle {
+    echo "checkGifsicle()";
+    command -v gifsicle >/dev/null 2>&1 || {
+        echo >&2 "Installing Gifsicle...";
+        sudo chmod 777 /usr/local/bin
+        brew install gifsicle
+    }
+}
+
+checkFFMPEG;
+checkNodeJS;
+checkNodeModules;
+checkGifsicle;
+
+echo "All dependencies are installed!";
+
 # Compile our code first.
 coffee -b -c --output js/ coffee/
 mkdir -p tmp

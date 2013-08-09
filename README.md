@@ -11,8 +11,13 @@ vid2gif
     
 
 ## Running the unit tests
+You'll need `nodeunit` to run the tests.
 
-    $ scripts/test
+    Install nodeunit
+    $ npm install -g nodeunit
+    
+    
+    $ nodeunit
     
 ## Bookmarklet for Youtube pages
 
