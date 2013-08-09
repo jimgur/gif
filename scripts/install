@@ -10,6 +10,7 @@ function checkFFMPEG {
 }
 
 function checkBrew {
+    echo "checkBrew()";
     local isInstalled="1"
     command -v brew>/dev/null 2>&1 || { isInstalled="0"; }
     
@@ -19,20 +20,31 @@ function checkBrew {
 }
 
 function checkNodeJS {
+    echo "checkNodeJS()";
     command -v node >/dev/null 2>&1 || {
         echo >&2 "Installing NodeJS...";
         checkBrew
         brew install node
-        exit 1;
     }
 }
 
-function checkYTDL {
+function checkNodeModules {
+    echo "checkYTDL()";
     command -v ytdl >/dev/null 2>&1 || {
         echo >&2 "Installing YTDL...";
+        # Might have to omit -g for some of these, but it SHOULD work
         npm install -g ytdl
         npm install -g oauth
-        exit 1;
+        npm install -g restler
+    }
+}
+
+function checkGifsicle {
+    echo "checkGifsicle()";
+    command -v gifsicle >/dev/null 2>&1 || {
+        echo >&2 "Installing Gifsicle...";
+        sudo chmod 777 /usr/local/bin
+        brew install gifsicle
     }
 }
 
@@ -41,7 +53,8 @@ while test $# -gt 0; do
         ffmpeg)
             checkFFMPEG;
             checkNodeJS;
-            checkYTDL;
+            checkNodeModules;
+            checkGifsicle;
                         
             exit 0;
             ;;

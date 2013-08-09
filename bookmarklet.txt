@@ -1,0 +1,70 @@
+(function(){
+    var player1 = document.getElementById('video-player');
+    var player2 = document.getElementById('movie_player');
+    var PLAYER = player1 || player2;
+    if(PLAYER) {
+       
+        function JSON2GET(obj){
+            var a = [];
+            for (var d in obj) { a.push(encodeURIComponent(d) + "=" + encodeURIComponent(obj[d])); }
+            return '?'+a.join("&");
+        }
+        
+        function sendGIFRequest(options) {
+            var defaults = {
+                url   : window.location.href.split('&')[0],
+                start : '0:0'
+            };
+            options = options || defaults;
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open( "GET", 'http://localhost:8888'+JSON2GET(options), false );
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && xhr.status === 200) {
+                    if(options.callback != null) {
+                        options.callback(JSON.parse(xhr.responseText));
+                    }
+                }
+            };
+            xhr.send();
+        }
+        
+        
+        
+        var doc = document.body;
+        /* could use either scrollWidth or scrollHeight for total dimensions. */
+        var overlayEl = document.createElement('div');
+        var overlayElStyle = {
+            'display'           : 'none',
+            'position'          : 'fixed',
+            'top'               : 0,
+            'left'              : 0,
+            'width'             : '100%',
+            'height'            : '100%',
+            'background'        : '#111',
+            'textAlign'         : 'center',
+            'verticalAlign'     : 'middle',
+            'zIndex'            : '9999'
+        };
+        for(var k in overlayElStyle) { overlayEl.style[k] = overlayElStyle[k]; }
+        
+        var dialogEl = document.createElement('div');
+        dialogEl.innerHTML = "YO!!!!";
+        
+        /* build the structure */
+        overlayEl.appendChild(dialogEl);       
+        document.body.appendChild(overlayEl);
+        
+        function showMsg(jsonResponse) {
+            overlayEl.innerHTML = "<img src=http://i.imgur.com/"+jsonResponse.data.id+".gif>";
+            overlayEl.style.display = "block";
+        }
+        
+        sendGIFRequest({
+            url      : window.location.href.split('&')[0],
+            start    : '0:0',
+            callback : showMsg
+        });
+        
+    }
+})();

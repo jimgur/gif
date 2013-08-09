@@ -4,7 +4,9 @@ do ( ->
   GLOBAL.ytdl     = require('ytdl')
   GLOBAL.url      = require('url')
   GLOBAL.ERRORS   = require('./ERRORS.js')  
-  GLOBAL.vid2gif  = require('./vid2gif.js') 
+  GLOBAL.vid2gif  = require('./vid2gif.js')
+  
+  #GLOBAL.uploader = require('./uploader.js')
   
   requestListener = (req, res) ->
     
@@ -36,8 +38,9 @@ do ( ->
     
     # Create a new converter instance
     gif      = new vid2gif({
-      res      : res
-      filename : filename
+      res         : res
+      filename    : filename
+      IMGURKEY    : 'a811ef40c9dcf16'
     })
     
     # Initiate download
