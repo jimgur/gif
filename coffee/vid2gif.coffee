@@ -10,7 +10,7 @@ class Vid2GIF
   INPUT_FPS : 50
   FPS       : 40
   MAXHEIGHT : 200
-  MAXWIDTH  : 240
+  MAXWIDTH  : 400
     
   constructor : (params) ->
     @[k] = v for k,v of params
