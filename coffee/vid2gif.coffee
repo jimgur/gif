@@ -131,7 +131,9 @@ class Vid2GIF
             "image" : restler.file("#{@filename}.opt.gif", null, stats.size, null, "image/gif")
         }
       ).on(
-        "complete", (data) => @sendResponse(data)
+        "complete", (data) =>
+          @deleteTmpFiles()
+          @sendResponse(data)
       )
     )
     return
@@ -149,8 +151,6 @@ class Vid2GIF
   sendResponse : (uploadResponse) ->
     jsonResponse = JSON.stringify(uploadResponse)
     console.log("Forwarding upload response...")
-    
-    #@deleteTmpFiles()
     
     @res.write(jsonResponse)
     @res.end()

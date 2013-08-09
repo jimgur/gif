@@ -52,6 +52,10 @@
         };
         for(var k in overlayElStyle) { overlayEl.style[k] = overlayElStyle[k]; }
         
+        var overlayCloseButton = document.createElement('input');
+        overlayCloseButton.setAttribute('type', 'button');
+        overlayCloseButton.setAttribute('value', 'close');
+        
         var dialogEl = document.createElement('div');
         dialogEl.innerHTML = "YO!!!!";
         
@@ -68,22 +72,24 @@
             
             var innerHTML = "";
             if(res.success) {
-                innerHTML += "<img src="+res.data.link+"><br/>";
-                innerHTML += "Direct Link : <code>"+res.data.link+"</code><br/>";
-                innerHTML += "Delete Link : <code>http://imgur.com/delete/"+res.data.deletehash+"</code><br/>";
+                innerHTML += "<img src="+res.data.link+"><br><br>";
+                innerHTML += "Direct Link <br> <a target='_blank' href="+res.data.link+"><code>"+res.data.link+"</code></a><br><br>";
+                innerHTML += "Delete Link <br> <a target='_blank' href='http://imgur.com/delete/"+res.data.deletehash+"'><code>http://imgur.com/delete/"+res.data.deletehash+"</code></a><br><br>";
             } else {
                 innerHTML += "<span style='color:#c33'>ERROR :( <code>"+res.data.error.message+"</code></span>";
             }
                         
             overlayEl.innerHTML = innerHTML;
             for(var k in style) { overlayEl.style[k] = style[k]; }
+            
+            overlayEl.appendChild(overlayCloseButton);
         }
         
         function hideOverlay() {
             overlayEl.style.display = 'none';
         }
         
-        overlayEl.ondblclick = hideOverlay;
+        overlayCloseButton.onclick = hideOverlay;
         
         sendGIFRequest({
             url      : window.location.href.split('&')[0],

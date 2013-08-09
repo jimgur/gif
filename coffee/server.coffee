@@ -44,7 +44,7 @@ do ( ->
     })
     
     # Initiate download
-    dl = ytdl(GET.url, { quality : 'lowest' })
+    dl = ytdl(GET.url, { quality : 'lowest' }) # '17' for something slightly better than lowest
     
     # Trigger the converter once the download is complete
     dl.on('end', -> gif.startConversion())
