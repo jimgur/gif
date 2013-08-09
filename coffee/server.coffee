@@ -9,10 +9,7 @@ do ( ->
   #GLOBAL.uploader = require('./uploader.js')
   
   requestListener = (req, res) ->
-    
-    # http://www.youtube.com/watch?v=R-HsWxMq36s
-    console.log("Request received for #{req.url}")
-    
+
     # CORS
     res.writeHead(200, {
       'Access-Control-Allow-Origin'  : '*'
@@ -33,7 +30,10 @@ do ( ->
       res.write(missingParams)
       res.end()
       return
+
       
+    console.log("Request received for Youtube video @ #{GET.url}...")
+    
     filename = "tmp/#{ (Math.random() * 1e6)>>0 }.flv"
     
     # Create a new converter instance
@@ -55,4 +55,6 @@ do ( ->
     return
   
   http.createServer().listen(8888, 'localhost').on('request', requestListener)
+  console.log('Server started at http://localhost:8888!')
+  console.log('****************************************')
 )

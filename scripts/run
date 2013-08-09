@@ -1,4 +1,7 @@
 #!/bin/bash
+
+# Compile our code first.
 coffee -b -c --output js/ coffee/
-mkdir tmp
+mkdir -p tmp
+clear
 node js/server.js

@@ -1,2 +1,0 @@
-#!/bin/bash
-coffee -b -c --output js/ coffee/

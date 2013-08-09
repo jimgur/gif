@@ -7,7 +7,7 @@ vid2gif
 
 ## Compile and run the node server
     
-    $ ./run
+    $ scripts/run
     
 
 ## Running the unit tests

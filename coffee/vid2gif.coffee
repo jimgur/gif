@@ -17,7 +17,6 @@ class Vid2GIF
     
   startConversion : ->
     console.log('Converting video to GIF...')
-    console.log("Running FFMPEG on #{@filename}...")
     
     cmd = [
       "bin/ffmpeg"                  # command name
@@ -36,7 +35,6 @@ class Vid2GIF
     ]
    
     cmd = cmd.join(' ')
-    console.log(cmd)
     
     child_process.exec(
       cmd,
@@ -140,17 +138,22 @@ class Vid2GIF
   
   deleteTmpFiles : ->
     console.log('Deleting temp files...')
-    fs.unlink("#{filename}", -> return)
-    fs.unlink("#{filename}.gif", -> return)
-    fs.unlink("#{filename}.opt.gif", -> return)
+    
+    fs.unlinkSync(file) for file in [
+      "#{@filename}"
+      "#{@filename}.gif"
+      "#{@filename}.opt.gif"
+    ]
+    return
   
   sendResponse : (uploadResponse) ->
     jsonResponse = JSON.stringify(uploadResponse)
-    console.log("GIF uploaded! Response = #{jsonResponse}")
+    console.log("Forwarding upload response...")
     
-    @deleteTmpFiles()
+    #@deleteTmpFiles()
     
     @res.write(jsonResponse)
     @res.end()
+    console.log("Transaction complete.")
   
 module.exports = Vid2GIF
