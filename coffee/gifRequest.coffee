@@ -82,6 +82,7 @@ GIFRequest =
   sendResponse : (imgurResponse, res) ->
     console.log("Forwarding upload response...")
     if res?
+      console.log("Response received was: #{JSON.stringify(imgurResponse)}")
       res.write(JSON.stringify(imgurResponse))
       res.end()
       console.log("Transaction complete.")
