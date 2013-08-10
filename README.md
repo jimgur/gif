@@ -15,11 +15,12 @@ You'll need `nodeunit` to run the tests.
 
     Install nodeunit
     $ npm install -g nodeunit
-    
-    
+       
     $ nodeunit
     
-## Bookmarklet for Youtube pages
+## Bookmarklet for YouTube pages
 
 See `bookmarklet.txt`.
 
+## Links and resources
+- https://en.wikipedia.org/wiki/YouTube#Quality_and_codecs

@@ -1,2 +1,3 @@
 #!/bin/bash
-jasmine-node --verbose --runWithRequireJs --coffee tests/
+coffee -b -c --output tests/ tests/
+nodeunit tests/*.js
