@@ -23,6 +23,10 @@ GIFRequest =
       'Access-Control-Allow-Methods' : 'GET,PUT,POST,DELETE,OPTIONS'
     })
     
+    if !(req.url?)
+      res.end()
+      return
+    
     GET = url.parse(req.url, true).query
     missingParams = null
     

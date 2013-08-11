@@ -1,3 +1,4 @@
 #!/bin/bash
-coffee -b -c --output tests/ tests/
-nodeunit tests/*.js
+#coffee -b -c --output tests/ tests/
+#nodeunit tests/*.js
+jasmine-node --coffee --verbose tests/
