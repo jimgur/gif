@@ -17,14 +17,13 @@ class ImgurUploader
     return
   
   ifFileExistsUpload : ->
-    if fs.existsSync(@filename)
-      fs.stat(@filename, (err, stats) => @upload(stats.size))
+    if fs.existsSync("#{@filename}.opt.gif")
+      fs.stat("#{@filename}.opt.gif", (err, stats) => @upload(stats.size))
     return
   
   upload : (size) ->
     console.log("UPLOADING #{@filename}.opt.gif -- SIZE #{size}")
     
-    # this stopped working for whatever reason
     restler.post(
       "https://api.imgur.com/3/image",
       {

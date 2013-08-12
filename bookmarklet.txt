@@ -42,7 +42,7 @@
             'bottom'            : 0,
             'left'              : 0,
             'width'             : '100%',
-            'height'            : '120px',
+            'height'            : '80px',
             'background'        : '#111',
             'textAlign'         : 'center',
             'verticalAlign'     : 'middle',
@@ -87,7 +87,7 @@
             
             var innerHTML = "";
             if(res.success) {
-                innerHTML += "<img src="+res.data.link+"><br><br>";
+                innerHTML += "<br><br><img src="+res.data.link+"><br><br>";
                 innerHTML += "Direct Link <br> <a target='_blank' href="+res.data.link+"><code>"+res.data.link+"</code></a><br><br>";
                 innerHTML += "Delete Link <br> <a target='_blank' href='http://imgur.com/delete/"+res.data.deletehash+"'><code>http://imgur.com/delete/"+res.data.deletehash+"</code></a><br><br>";
             } else {
@@ -101,7 +101,7 @@
         }
         
         function showProgressMessage(msg) {
-            overlayEl.innerText = msg;
+            overlayEl.innerHTML = msg;
         }
         
         function hideOverlay() {
@@ -110,7 +110,7 @@
         
         overlayCloseButton.onclick = hideOverlay;
         
-        showProgressMessage('Hold on! Making a GIF of this video...');
+        showProgressMessage('Hold on! Making a GIF of this video...<br><img src=http://jquerymobile.com/demos/1.2.0/css/themes/default/images/ajax-loader.gif>');
         sendGIFRequest({
             url      : window.location.href.split('&')[0],
             start    : prompt('start time', '0m0s'),
