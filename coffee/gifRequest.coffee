@@ -70,7 +70,7 @@ GIFRequest =
     new uploader({
       filename : filename
       cb : (response) =>
-        #@deleteTempFiles(filename)
+        @deleteTempFiles(filename)
         @sendResponse(response, res)
     })
 

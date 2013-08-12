@@ -91,7 +91,7 @@
                 innerHTML += "Direct Link <br> <a target='_blank' href="+res.data.link+"><code>"+res.data.link+"</code></a><br><br>";
                 innerHTML += "Delete Link <br> <a target='_blank' href='http://imgur.com/delete/"+res.data.deletehash+"'><code>http://imgur.com/delete/"+res.data.deletehash+"</code></a><br><br>";
             } else {
-                innerHTML += "<span style='color:#c33'>ERROR :( <code>"+res.data.error.message+"</code></span>";
+                innerHTML += "<span style='color:#c33'>ERROR :( <code>"+res.data.error+"</code></span><br><br>";
             }
                         
             overlayEl.innerHTML = innerHTML;
@@ -110,15 +110,12 @@
         
         overlayCloseButton.onclick = hideOverlay;
         
-        makeGIFEl.onclick = function() {
-            showProgressMessage('Sent a GIF request!');
-        
-            sendGIFRequest({
-                url      : window.location.href.split('&')[0],
-                start    : dialogEl.value,
-                callback : showMsg
-            });
-        };
-        
+        showProgressMessage('Hold on! Making a GIF of this video...');
+        sendGIFRequest({
+            url      : window.location.href.split('&')[0],
+            start    : prompt('start time', '0m0s'),
+            callback : showMsg
+        });
+           
     }
 })();
