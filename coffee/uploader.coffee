@@ -17,7 +17,8 @@ class ImgurUploader
     return
   
   ifFileExistsUpload : ->
-    fs.stat(@filename, (err, stats) => @upload(stats.size))
+    if fs.existsSync(@filename)
+      fs.stat(@filename, (err, stats) => @upload(stats.size))
     return
   
   upload : (size) ->
