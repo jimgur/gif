@@ -22,9 +22,10 @@ class ImgurUploader
     return
   
   upload : (size) ->
-    console.log("UPLOAD SIZE #{size}")
+    console.log("UPLOADING #{@filename}.opt.gif -- SIZE #{size}")
     
-    uploadReq = restler.post(
+    # this stopped working for whatever reason
+    restler.post(
       "https://api.imgur.com/3/image",
       {
         headers   : { "Authorization" : "Client-ID #{@IMGURKEY}" }
@@ -32,8 +33,7 @@ class ImgurUploader
         data      :
           "image" : restler.file("#{@filename}.opt.gif", null, size, null, "image/gif")
       }
-    )
-    uploadReq.on("complete", @cb)
+    ).on("complete", @cb)
     return
     
   
